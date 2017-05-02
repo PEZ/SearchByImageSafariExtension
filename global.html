@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Hello World</title>
+  <script type="text/javascript" charset="utf-8">
+  safari.application.addEventListener("contextmenu", handleContextMenu, false);
+  safari.application.addEventListener("command", handleCommand, false);
+  //safari.application.addEventListener("validate", handleValidate, false);
+
+  function searchByImage(imageUrl) {
+    var tab = safari.application.activeBrowserWindow.openTab();
+    tab.url = "http://images.google.com/searchbyimage?image_url=" + encodeURIComponent(imageUrl);
+  }
+
+  function handleCommand(event) {
+    if (event.command === "searchByImage") {
+      searchByImage(event.userInfo.src);
+    }
+  }
+
+  function handleContextMenu(event) {
+    if (event.userInfo != null) {
+      event.contextMenu.appendContextMenuItem("searchbyimage", "Search by image", "searchByImage");
+    }
+  }
+
+  </script>
+</head>
+<body>
+</body>
+</html>
